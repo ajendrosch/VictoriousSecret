@@ -5,9 +5,7 @@ import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,11 +17,11 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.victor.loading.rotate.RotateLoading;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-import com.victor.loading.rotate.RotateLoading;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -193,6 +191,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -201,6 +200,7 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+        */
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -265,19 +265,9 @@ public class MainActivity extends AppCompatActivity
                 String showString = "Record button is clicked!";
                 onPlay(mStartPlaying);
                 if (mStartPlaying) {
-                    if (rotateLoading.isStart()) {
-                        rotateLoading.stop();
-                    } else {
-                        rotateLoading.start();
-                    }
-                    showString = "Stop playing";
-                } else {
-                    if (rotateLoading.isStart()) {
-                        rotateLoading.stop();
-                    } else {
-                        rotateLoading.start();
-                    }
                     showString = "Start playing";
+                } else {
+                    showString = "Stop playing";
                 }
                 mStartPlaying = !mStartPlaying;
 

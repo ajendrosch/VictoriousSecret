@@ -10,14 +10,9 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.bjtu.al.summerschool.MainActivity"
-    android:background="@color/colorAccent2"
+    android:background="@android:color/black"
     tools:showIn="@layout/app_bar_main">
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
 
     <com.victor.loading.rotate.RotateLoading
         android:id="@+id/rotateloading"
