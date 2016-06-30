@@ -19,6 +19,14 @@
         android:layout_height="wrap_content"
         android:text="Hello World!" />
 
+    <com.victor.loading.rotate.RotateLoading
+        android:id="@+id/rotateloading"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:loading_width="5dp"
+        app:loading_color="#ffffff"
+        android:layout_centerInParent="true"/>
+
     <ImageButton
         android:background="@android:color/transparent"
         android:layout_width="wrap_content"

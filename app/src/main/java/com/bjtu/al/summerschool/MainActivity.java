@@ -1,29 +1,9 @@
 package com.bjtu.al.summerschool;
 
 import android.content.Context;
-import android.content.Intent;
-import android.media.Image;
-import android.os.Environment;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.Toast;
-import android.media.MediaRecorder;
 import android.media.MediaPlayer;
-
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
-import android.content.Context;
-import android.media.Image;
+import android.media.MediaRecorder;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -32,17 +12,18 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
-import android.media.MediaRecorder;
-import android.media.MediaPlayer;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import com.victor.loading.rotate.RotateLoading;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -58,6 +39,8 @@ public class MainActivity extends AppCompatActivity
 
     boolean mStartPlaying = true;
     boolean mStartRecording = true;
+
+    private RotateLoading rotateLoading;
 
 
     private void onRecord(boolean start) {
@@ -198,13 +181,14 @@ public class MainActivity extends AppCompatActivity
         ImageButton imageButton1;
         ImageButton imageButton2;
 
-
         mFileName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Recordings" ;
         String date = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
         mFileName += date + ".aac";
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        rotateLoading = (RotateLoading) findViewById(R.id.rotateloading);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -234,12 +218,23 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onClick(View arg0) {
+
                 String showString = "Record button is clicked!";
                 onRecord(mStartRecording);
                 if (mStartRecording) {
-                    showString = ("Stop recording");
-                } else {
+                    if (rotateLoading.isStart()) {
+                        rotateLoading.stop();
+                    } else {
+                        rotateLoading.start();
+                    }
                     showString = ("Start recording");
+                } else {
+                    if (rotateLoading.isStart()) {
+                        rotateLoading.stop();
+                    } else {
+                        rotateLoading.start();
+                    }
+                    showString = ("Stop recording");
                 }
                 mStartRecording = !mStartRecording;
 
@@ -270,8 +265,18 @@ public class MainActivity extends AppCompatActivity
                 String showString = "Record button is clicked!";
                 onPlay(mStartPlaying);
                 if (mStartPlaying) {
+                    if (rotateLoading.isStart()) {
+                        rotateLoading.stop();
+                    } else {
+                        rotateLoading.start();
+                    }
                     showString = "Stop playing";
                 } else {
+                    if (rotateLoading.isStart()) {
+                        rotateLoading.stop();
+                    } else {
+                        rotateLoading.start();
+                    }
                     showString = "Start playing";
                 }
                 mStartPlaying = !mStartPlaying;
