@@ -60,6 +60,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/recordButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="77dp"/>
+        android:layout_marginTop="77dp"
+
+        />
 
 </RelativeLayout>

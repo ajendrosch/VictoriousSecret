@@ -190,10 +190,10 @@ public class MainActivity extends AppCompatActivity
                 String showString = "Record button is clicked!";
                 onPlay(mStartPlaying);
                 if (mStartPlaying) {
-                    showString = "Start playing";
+                    showString = "Started playing";
                     imageButton2.setBackgroundResource(R.drawable.ic_pause_circle_filled_black_48dp);
                 } else {
-                    showString = "Stop playing";
+                    showString = "Stopped playing";
                     imageButton2.setBackgroundResource(R.drawable.ic_play_circle_filled_black_48dp);
                 }
                 mStartPlaying = !mStartPlaying;
@@ -214,7 +214,7 @@ public class MainActivity extends AppCompatActivity
                 saveButton.setBackgroundResource(R.drawable.ic_add_circle_black_48dp);
                 deleteButton.setBackgroundResource(R.drawable.ic_delete_black_48dp);
 
-                String showString = "Record button is clicked!";
+                String showString = "";
                 onRecord(mStartRecording);
                 if (mStartRecording) {
                     if (rotateLoading.isStart()) {
@@ -222,14 +222,14 @@ public class MainActivity extends AppCompatActivity
                     } else {
                         rotateLoading.start();
                     }
-                    showString = ("Start recording");
+                    showString = ("Started recording");
                 } else {
                     if (rotateLoading.isStart()) {
                         rotateLoading.stop();
                     } else {
                         rotateLoading.start();
                     }
-                    showString = ("Stop recording");
+                    showString = ("Stopped recording");
                 }
                 mStartRecording = !mStartRecording;
 

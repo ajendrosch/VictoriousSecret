@@ -6,23 +6,11 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="com.bjtu.al.summerschool.MainActivity">
-    <include layout="@layout/content_main" />
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
-
-        <!--
-        <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        app:popupTheme="@style/AppTheme.PopupOverlay" />
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-        -->
-
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -32,5 +20,6 @@
             app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
     </android.support.design.widget.AppBarLayout>
+    <include layout="@layout/content_main" />
 
 </android.support.design.widget.CoordinatorLayout>

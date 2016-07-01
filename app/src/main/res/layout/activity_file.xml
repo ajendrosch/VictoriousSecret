@@ -3,13 +3,15 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="#f4f4f4" >
+    android:background="#f4f4f4"
+    android:choiceMode="singleChoice"
+    >
+
+
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="495dp"
-        android:id="@+id/listView" /><![CDATA[
-        android:choiceMode="singleChoice">
-    ]]>
+        android:layout_height="600dp"
+        android:id="@+id/listView" />
 
     <SeekBar
         android:layout_width="match_parent"

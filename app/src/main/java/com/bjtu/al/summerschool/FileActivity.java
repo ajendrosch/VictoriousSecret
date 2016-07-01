@@ -72,7 +72,7 @@ public class FileActivity extends AppCompatActivity {
                 startPlaying(str);
                 mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     public void onCompletion(MediaPlayer mp) {
-                        playbutton.setBackgroundResource(R.drawable.ic_play_circle_filled_black_24dp);
+                        playbutton.setBackgroundResource(R.drawable.ic_play_circle_filled_black_48dp);
                     }
                 });
                 playbutton.setBackgroundColor(Color.TRANSPARENT);
