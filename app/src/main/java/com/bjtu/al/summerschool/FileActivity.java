@@ -39,7 +39,7 @@ public class FileActivity extends AppCompatActivity  {
 
     private void startPlaying(String mFileName) {
         mPlayer = new MediaPlayer();
-     
+
         try {
             mPlayer.setDataSource(FileManager.path + "/" + mFileName);
             mPlayer.prepare();
