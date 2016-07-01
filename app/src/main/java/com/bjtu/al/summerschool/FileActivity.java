@@ -1,37 +1,25 @@
 package com.bjtu.al.summerschool;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Handler;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
-public class FileActivity extends AppCompatActivity  {
+public class FileActivity extends AppCompatActivity {
     private static final String LOG_TAG = "AudioRecordTest";
     private MediaPlayer mPlayer = null;
     private Handler mHandler = new Handler();
@@ -39,7 +27,6 @@ public class FileActivity extends AppCompatActivity  {
 
     private void startPlaying(String mFileName) {
         mPlayer = new MediaPlayer();
-
         try {
             mPlayer.setDataSource(FileManager.path + "/" + mFileName);
             mPlayer.prepare();
@@ -66,7 +53,8 @@ public class FileActivity extends AppCompatActivity  {
         final ListView listView = (ListView) findViewById(R.id.listView);
         final TextView progressView = (TextView) findViewById(R.id.progressView);
         final ImageButton playbutton = (ImageButton) findViewById(R.id.playButton2);
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         ArrayAdapter itemsAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, FileManager.GetFiles());
         listView.setAdapter(itemsAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -83,6 +71,11 @@ public class FileActivity extends AppCompatActivity  {
                 save = position;
                 String str = ((TextView) v).getText().toString();
                 startPlaying(str);
+                mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    public void onCompletion(MediaPlayer mp) {
+                        playbutton.setBackgroundResource(R.drawable.ic_play_circle_filled_black_24dp);
+                    }
+                });
                 playbutton.setBackgroundColor(Color.TRANSPARENT);
                 playbutton.setBackgroundResource(R.drawable.ic_pause_circle_filled_black_24dp);
                 mSeekBar.setMax(mPlayer.getDuration());
@@ -113,7 +106,7 @@ public class FileActivity extends AppCompatActivity  {
                     mSeekBar.setProgress(mPlayer.getCurrentPosition());
                     progressView.setText(ToMinutes((mCurrentPosition*1000)));
                 }
-                mHandler.postDelayed(this, 1);
+                mHandler.postDelayed(this, 10);
             }
         });
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {

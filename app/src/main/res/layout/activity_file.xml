@@ -4,7 +4,10 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:background="#f4f4f4" >
-
+    <include
+        layout="@layout/app_bar_file"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <ListView
         android:layout_width="match_parent"
         android:layout_height="495dp"
@@ -31,5 +34,6 @@
         android:layout_gravity="center"
         android:background="@android:color/transparent"
         />
+
 
 </LinearLayout>
