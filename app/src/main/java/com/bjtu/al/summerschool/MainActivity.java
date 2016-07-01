@@ -1,6 +1,7 @@
 package com.bjtu.al.summerschool;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
@@ -27,12 +28,9 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String LOG_TAG = "AudioRecordTest";
-    private static String mFileName = null;
-
+    private String mFileName;
     private ImageButton mRecordButton = null;
     private MediaRecorder mRecorder = null;
-
-    private ImageButton mPlayButton = null;
     private MediaPlayer mPlayer = null;
 
     boolean mStartPlaying = true;
@@ -78,6 +76,10 @@ public class MainActivity extends AppCompatActivity
         mRecorder.reset();
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+        mFileName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/BeijingRecordings/" ;
+        String date = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+        mFileName += date + ".aac";
+
         mRecorder.setOutputFile(mFileName);
         mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
 
@@ -106,13 +108,12 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
-
+            Intent intent = new Intent(MainActivity.this, FileActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_manage) {
-
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -120,68 +121,10 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-
-    class RecordButton extends ImageButton {
-        boolean mStartRecording = true;
-
-        OnClickListener clicker = new OnClickListener() {
-            public void onClick(View v) {
-                onRecord(mStartRecording);
-                String showString = "";
-                if (mStartRecording) {
-                    showString = "Started recording";
-                } else {
-                    showString = "Stopped recording";
-                }
-                mStartRecording = !mStartRecording;
-
-                Toast.makeText(MainActivity.this, showString, Toast.LENGTH_SHORT).show();
-            }
-        };
-
-        public RecordButton(Context ctx) {
-            super(ctx);
-            //setText("Start recording");
-            Toast.makeText(MainActivity.this, "Stopped", Toast.LENGTH_SHORT).show();
-            setOnClickListener(clicker);
-        }
-    }
-
-    class PlayButton extends ImageButton {
-        boolean mStartPlaying = true;
-
-        OnClickListener clicker = new OnClickListener() {
-            public void onClick(View v) {
-                onPlay(mStartPlaying);
-                String showString = "";
-                if (mStartPlaying) {
-                    showString = "Started playing";
-                } else {
-                    showString = "Stropped playing";
-                }
-                mStartPlaying = !mStartPlaying;
-
-                Toast.makeText(MainActivity.this, showString, Toast.LENGTH_SHORT).show();
-            }
-        };
-
-        public PlayButton(Context ctx) {
-            super(ctx);
-            //setText("Start playing");
-            Toast.makeText(MainActivity.this, "Stopped", Toast.LENGTH_SHORT).show();
-            setOnClickListener(clicker);
-        }
-    }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ImageButton imageButton1;
         ImageButton imageButton2;
-
-        mFileName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Recordings" ;
-        String date = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-        mFileName += date + ".aac";
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -242,19 +185,6 @@ public class MainActivity extends AppCompatActivity
             }
 
         });
-
-        // PHILIP IS REPLACING IT
-        /*
-        imageButton1.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                Intent intent = new Intent(MainActivity.this, FileActivity.class);
-                startActivity(intent);
-            }
-
-        });
-        */
 
         // play button
         imageButton2 = (ImageButton) findViewById(R.id.playButton);
