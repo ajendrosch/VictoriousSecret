@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity
 
         rotateLoading = (RotateLoading) findViewById(R.id.rotateloading);
 
+        //NAVBAR
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
