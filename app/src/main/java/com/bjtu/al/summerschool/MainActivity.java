@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity
 
     private RotateLoading rotateLoading;
 
+    // TODO onPAUSE onContinue etc. integrieren.
 
     private void onRecord(boolean start) {
         if (start) {
@@ -98,6 +99,26 @@ public class MainActivity extends AppCompatActivity
         mRecorder = null;
     }
 
+    private void saveRecording() {
+        mRecorder.stop();
+        mRecorder.release();
+        mRecorder = null;
+    }
+
+    private void deleteRecording() {
+        mRecorder.stop();
+        mRecorder.reset();
+        mRecorder = null;
+    }
+
+    private void continueRecording() {
+        mRecorder.start();
+    }
+
+    private void pauseRecording() {
+        mRecorder.stop();
+    }
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -116,7 +137,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ImageButton imageButton1;
-        ImageButton imageButton2;
+        final ImageButton imageButton2;
+        final ImageButton deleteButton;
+        final ImageButton saveButton;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -135,6 +158,50 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // save button
+        saveButton = (ImageButton) findViewById(R.id.saveButton);
+        //saveButton.setBackgroundResource(R.drawable.ic_pause_circle_filled_black_24dp);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+
+                Toast.makeText(MainActivity.this, "Save Pressed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // delete button
+        deleteButton = (ImageButton) findViewById(R.id.deleteButton);
+        //deleteButton.setBackgroundResource(R.drawable.ic_pause_circle_filled_black_24dp);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+
+                Toast.makeText(MainActivity.this, "Delete Pressed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // play button
+        imageButton2 = (ImageButton) findViewById(R.id.playButton);
+        //imageButton2.setBackgroundResource(R.drawable.ic_pause_circle_filled_black_24dp);
+        imageButton2.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                String showString = "Record button is clicked!";
+                onPlay(mStartPlaying);
+                if (mStartPlaying) {
+                    showString = "Start playing";
+                    imageButton2.setBackgroundResource(R.drawable.ic_pause_circle_filled_black_48dp);
+                } else {
+                    showString = "Stop playing";
+                    imageButton2.setBackgroundResource(R.drawable.ic_play_circle_filled_black_48dp);
+                }
+                mStartPlaying = !mStartPlaying;
+
+                Toast.makeText(MainActivity.this, showString, Toast.LENGTH_SHORT).show();
+            }
+
+        });
 
         // record button
         imageButton1 = (ImageButton) findViewById(R.id.recordButton);
@@ -142,6 +209,10 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onClick(View arg0) {
+
+                imageButton2.setBackgroundResource(R.drawable.ic_play_circle_filled_black_48dp);
+                saveButton.setBackgroundResource(R.drawable.ic_add_circle_black_48dp);
+                deleteButton.setBackgroundResource(R.drawable.ic_delete_black_48dp);
 
                 String showString = "Record button is clicked!";
                 onRecord(mStartRecording);
@@ -167,25 +238,6 @@ public class MainActivity extends AppCompatActivity
 
         });
 
-        // play button
-        imageButton2 = (ImageButton) findViewById(R.id.playButton);
-        imageButton2.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                String showString = "Record button is clicked!";
-                onPlay(mStartPlaying);
-                if (mStartPlaying) {
-                    showString = "Start playing";
-                } else {
-                    showString = "Stop playing";
-                }
-                mStartPlaying = !mStartPlaying;
-
-                Toast.makeText(MainActivity.this, showString, Toast.LENGTH_SHORT).show();
-            }
-
-        });
     }
 
     @Override
