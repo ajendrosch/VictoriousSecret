@@ -84,7 +84,7 @@ public class FileActivity extends AppCompatActivity  {
                 String str = ((TextView) v).getText().toString();
                 startPlaying(str);
                 playbutton.setBackgroundColor(Color.TRANSPARENT);
-                playbutton.setBackgroundResource(R.drawable.ic_pause_circle_filled_black_24dp);
+                playbutton.setBackgroundResource(R.drawable.ic_pause_circle_filled_black_48dp);
                 mSeekBar.setMax(mPlayer.getDuration());
             }
         });
@@ -96,10 +96,10 @@ public class FileActivity extends AppCompatActivity  {
                 }
                 if (mPlayer.isPlaying()) {
                     mPlayer.pause();
-                    playbutton.setBackgroundResource(R.drawable.ic_play_circle_filled_black_24dp);
+                    playbutton.setBackgroundResource(R.drawable.ic_play_circle_filled_black_48dp);
                 } else {
                     mPlayer.start();
-                    playbutton.setBackgroundResource(R.drawable.ic_pause_circle_filled_black_24dp);
+                    playbutton.setBackgroundResource(R.drawable.ic_pause_circle_filled_black_48dp);
                 }
             }
         });
