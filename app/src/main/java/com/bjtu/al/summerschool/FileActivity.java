@@ -53,8 +53,7 @@ public class FileActivity extends AppCompatActivity {
         final ListView listView = (ListView) findViewById(R.id.listView);
         final TextView progressView = (TextView) findViewById(R.id.progressView);
         final ImageButton playbutton = (ImageButton) findViewById(R.id.playButton2);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
         ArrayAdapter itemsAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, FileManager.GetFiles());
         listView.setAdapter(itemsAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
