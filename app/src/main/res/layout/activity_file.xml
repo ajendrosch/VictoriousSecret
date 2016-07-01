@@ -3,19 +3,22 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="#f4f4f4" >
+    android:background="#f4f4f4"
+    android:weightSum="1">
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="495dp"
-        android:id="@+id/listView" /><![CDATA[
+        android:layout_height="340dp"
+        android:id="@+id/listView"
+        android:layout_weight="0.12" /><![CDATA[
         android:choiceMode="singleChoice">
     ]]>
 
     <SeekBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/seekBar" />
+        android:id="@+id/seekBar"
+        android:layout_below="@+id/listView" />
 
     <TextView
         android:layout_width="wrap_content"
