@@ -3,18 +3,16 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="#f4f4f4"
+    android:background="@android:color/background_light"
     android:choiceMode="singleChoice"
-    >
+    android:weightSum="1">
 
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="281dp"
         android:id="@+id/listView"
-        android:choiceMode="singleChoice"
-        android:listSelector="#51B7A6"
-        />
+        android:layout_weight="0.55" />
 
     <SeekBar
         android:layout_width="match_parent"

@@ -10,14 +10,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.bjtu.al.summerschool.MainActivity"
-    android:background="@android:color/white"
+    android:background="@android:color/background_light"
     tools:showIn="@layout/app_bar_main">
 
 
     <com.victor.loading.rotate.RotateLoading
         android:id="@+id/rotateloading"
-        android:layout_width="256dp"
-        android:layout_height="256dp"
+        android:layout_width="265dp"
+        android:layout_height="265dp"
         app:loading_width="5dp"
         app:loading_color="@color/colorAccent"
         android:layout_alignLeft="@+id/recordButton"
@@ -60,8 +60,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/recordButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="77dp"
-
-        />
+        android:layout_marginTop="77dp"/>
 
 </RelativeLayout>

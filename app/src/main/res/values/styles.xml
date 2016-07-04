@@ -2,9 +2,15 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">#673AB7</item>
+        <!--item name="colorPrimary">#673AB7</item>
+
+        <item name="colorPrimaryDark">@color/mic_green</item>
+
         <item name="colorPrimaryDark">#512DA8</item>
-        <item name="colorAccent">#FF4081</item>
+        <item name="colorAccent">#FF4081</item-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">#666666</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <!-- Main Theme -->
@@ -14,9 +20,9 @@
     </style>
 
     <!-- Overlay Theme -->
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark" />
 
     <!-- Popup Theme -->
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
 
 </resources>

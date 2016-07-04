@@ -8,4 +8,7 @@
     <color name="backgr">#C5CAE9</color>
     <color name="colorAccent2">#68EFAD</color>
     <color name="a700">#DD2C00</color>
+
+    <color name="mic_green">#51B7A6</color>
+    <color name="mic_orange">#C05205</color>
 </resources>
