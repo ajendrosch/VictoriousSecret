@@ -61,12 +61,6 @@ public class FileActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v,int position, long arg3)
             {
                 stopPlaying();
-                parent.getChildAt(position).setBackgroundColor(Color.BLUE);
-
-                if (save != -1 && save != position){
-                    parent.getChildAt(save).setBackgroundColor(Color.WHITE);
-                }
-
                 save = position;
                 String str = ((TextView) v).getText().toString();
                 startPlaying(str);

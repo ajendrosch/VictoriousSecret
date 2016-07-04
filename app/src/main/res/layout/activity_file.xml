@@ -10,8 +10,11 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:id="@+id/listView" />
+        android:layout_height="400dp"
+        android:id="@+id/listView"
+        android:choiceMode="singleChoice"
+        android:listSelector="#51B7A6"
+        />
 
     <SeekBar
         android:layout_width="match_parent"
