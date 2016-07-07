@@ -1,12 +1,18 @@
 package com.bjtu.al.summerschool;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -37,6 +43,10 @@ public class MainActivity extends AppCompatActivity
     boolean mStartRecording = true;
 
     private RotateLoading rotateLoading;
+
+    String format;
+
+
 
     // TODO onPAUSE onContinue etc. integrieren.
 
@@ -79,10 +89,31 @@ public class MainActivity extends AppCompatActivity
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
         mFileName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/BeijingRecordings/" ;
         String date = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-        mFileName += date + ".aac";
+        mFileName += date + format;
 
         mRecorder.setOutputFile(mFileName);
-        mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+        switch(format){
+            case "AAC":
+                mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+                break;
+            case "AAC_ELD":
+                mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC_ELD);
+                break;
+            case "AMR_NB":
+                mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+                break;
+            case "AMR_WB":
+                mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB);
+                break;
+            case "HE_AAC":
+                mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.HE_AAC);
+                break;
+            case "VORBIS":
+                mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.VORBIS);
+                break;
+            default:
+                mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+        }
 
         try {
             mRecorder.prepare();
@@ -128,6 +159,8 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this, FileActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_manage) {
+           Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+           startActivity(intent);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -140,6 +173,9 @@ public class MainActivity extends AppCompatActivity
         final ImageButton imageButton2;
         final ImageButton deleteButton;
         final ImageButton saveButton;
+        // LOAD PREFERENCES
+        SharedPreferences settings = getSharedPreferences("settings", 0);
+        format = settings.getString("format", "AAC");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -235,6 +271,8 @@ public class MainActivity extends AppCompatActivity
                 mStartRecording = !mStartRecording;
 
                 Toast.makeText(MainActivity.this, showString, Toast.LENGTH_SHORT).show();
+
+
             }
 
         });
@@ -254,5 +292,71 @@ public class MainActivity extends AppCompatActivity
             mPlayer = null;
         }
     }
+
+    public void createNotification(View view) {
+        final NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.mipmap.play)
+                        .setContentTitle("My notification")
+                        .setContentText("Hello World!");
+
+        /*
+        Intent resultIntent = new Intent(this, MainActivity.class);
+        // Because clicking the notification opens a new ("special") activity, there's
+        // no need to create an artificial back stack.
+        PendingIntent resultPendingIntent =
+                PendingIntent.getActivity(
+                        this,
+                        0,
+                        resultIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+        mBuilder.setContentIntent(resultPendingIntent);
+        // Sets an ID for the notification
+        int mNotificationId = 001;
+        // Gets an instance of the NotificationManager service
+        NotificationManager mNotifyMgr =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        // Builds the notification and issues it.
+        mNotifyMgr.notify(mNotificationId, mBuilder.build());
+*/
+        // Sets an ID for the notification
+        final int mNotificationId = 001;
+        // Start a lengthy operation in a background thread
+        final NotificationManager mNotifyManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        int incr;
+                        // Do the "lengthy" operation 20 times
+                        for (incr = 0; incr <= 100; incr+=5) {
+                            // Sets the progress indicator to a max value, the
+                            // current completion percentage, and "determinate"
+                            // state
+                            mBuilder.setProgress(100, incr, false);
+                            // Displays the progress bar for the first time.
+                            mNotifyManager.notify(mNotificationId, mBuilder.build());
+                            // Sleeps the thread, simulating an operation
+                            // that takes time
+                            try {
+                                // Sleep for 5 seconds
+                                Thread.sleep(5*1000);
+                            } catch (InterruptedException e) {
+                                Log.d("Notification", "sleep failure");
+                            }
+                        }
+                        // When the loop is finished, updates the notification
+                        mBuilder.setContentText("Download complete")
+                                // Removes the progress bar
+                                .setProgress(0,0,false);
+                        mNotifyManager.notify(mNotificationId, mBuilder.build());
+                    }
+                }
+// Starts the thread by calling the run() method in its Runnable
+        ).start();
+    }
+
 
 }

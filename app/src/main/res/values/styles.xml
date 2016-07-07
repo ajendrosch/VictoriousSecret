@@ -25,4 +25,7 @@
     <!-- Popup Theme -->
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
 
+    <!-- Spinner Theme -->
+    <style name="AppTheme.Spinner" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

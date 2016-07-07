@@ -20,11 +20,9 @@
         android:layout_height="265dp"
         app:loading_width="5dp"
         app:loading_color="@color/colorAccent"
+        android:layout_alignTop="@+id/recordButton"
         android:layout_alignLeft="@+id/recordButton"
-        android:layout_alignStart="@+id/recordButton"
-        android:layout_alignRight="@+id/recordButton"
-        android:layout_alignEnd="@+id/recordButton"
-        android:layout_marginTop="70dp"/>
+        android:layout_alignStart="@+id/recordButton" />
 
     <ImageButton
         android:id="@+id/recordButton"
@@ -32,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/microphone"
-        android:layout_alignBottom="@+id/rotateloading"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
     <ImageButton
@@ -40,35 +38,29 @@
         android:background="@android:color/transparent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/playButton"
-        android:layout_alignLeft="@+id/recordButton"
-        android:layout_alignStart="@+id/recordButton" />
+        android:layout_below="@+id/saveButton"
+        android:layout_alignLeft="@+id/saveButton"
+        android:layout_alignStart="@+id/saveButton"
+        android:layout_marginTop="43dp" />
 
     <ImageButton
         android:id="@+id/saveButton"
         android:background="@android:color/transparent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/playButton"
-        android:layout_alignRight="@+id/recordButton"
-        android:layout_alignEnd="@+id/recordButton" />
+        android:layout_below="@+id/playButton"
+        android:layout_toRightOf="@+id/rotateloading"
+        android:layout_toEndOf="@+id/rotateloading"
+        android:layout_marginTop="31dp" />
 
     <ImageButton
         android:id="@+id/playButton"
         android:background="@android:color/transparent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/recordButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="77dp"/>
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="createNotification"
-        android:text="Create Notification" >
-    </Button>
-
+        android:layout_marginTop="62dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/rotateloading"
+        android:layout_toEndOf="@+id/rotateloading" />
 
 </RelativeLayout>

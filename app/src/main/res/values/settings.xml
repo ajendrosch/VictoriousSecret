@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="format_prompt">Choose a format</string>
+
+    <string-array name="data_format">
+        <item>AAC</item>
+        <item>AAC_ELD</item>
+        <item>AMR_NB</item>
+        <item>AMR_WB</item>
+        <item>HE_AAC</item>
+        <item>VORBIS</item>
+    </string-array>
+
+</resources>
