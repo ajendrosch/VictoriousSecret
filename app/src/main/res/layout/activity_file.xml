@@ -7,19 +7,15 @@
     android:choiceMode="singleChoice"
     android:weightSum="1">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Recorded Files"
-        android:id="@+id/FileText"
-        android:layout_gravity="right"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="281dp"
         android:id="@+id/listView"
-        android:layout_weight="0.55" />
+        android:layout_weight="0.55"
+        android:choiceMode="singleChoice"
+        android:listSelector="#51B7A6"
+        />
 
     <SeekBar
         android:layout_width="match_parent"
@@ -29,16 +25,43 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="-"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="00:00"
         android:id="@+id/progressView"
-        android:layout_gravity="right" />
+        android:layout_gravity="center" />
+
+    <LinearLayout
+        android:id="@+id/LinearLayout02"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:gravity="center"
+        android:layout_alignParentBottom="true">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/prevButton"
+            android:background="@drawable/ic_skip_previous_black_48dp"
+            />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/playButton2"
+            android:background="@android:color/transparent"
+            />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nextButton"
+            android:background="@drawable/ic_skip_next_black_48dp"
+            />
+    </LinearLayout>
 
     <ImageButton
+        android:id="@+id/deleteButton"
+        android:background="@android:color/transparent"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/playButton2"
-        android:layout_gravity="center"
-        android:background="@android:color/transparent"
         />
 
 
