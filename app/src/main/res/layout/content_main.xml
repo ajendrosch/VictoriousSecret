@@ -35,23 +35,6 @@
         android:layout_alignBottom="@+id/rotateloading"
         android:layout_centerHorizontal="true" />
 
-    <ImageButton
-        android:id="@+id/deleteButton"
-        android:background="@android:color/transparent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/playButton"
-        android:layout_alignLeft="@+id/recordButton"
-        android:layout_alignStart="@+id/recordButton" />
-
-    <ImageButton
-        android:id="@+id/saveButton"
-        android:background="@android:color/transparent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/playButton"
-        android:layout_alignRight="@+id/recordButton"
-        android:layout_alignEnd="@+id/recordButton" />
 
     <ImageButton
         android:id="@+id/playButton"
