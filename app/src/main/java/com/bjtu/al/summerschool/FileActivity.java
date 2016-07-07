@@ -1,10 +1,14 @@
 package com.bjtu.al.summerschool;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -29,6 +33,8 @@ import java.util.Date;
 
 public class FileActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+
     private static final String LOG_TAG = "AudioRecordTest";
     private MediaPlayer mPlayer = null;
     private Handler mHandler = new Handler();
@@ -156,13 +162,91 @@ public class FileActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_slideshow) {
+
         } else if (id == R.id.nav_manage) {
+            Intent intent = new Intent(FileActivity.this, SettingsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_record) {
             Intent intent = new Intent(FileActivity.this, MainActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_translate) {
+            Intent intent = new Intent(FileActivity.this, TranslateActivity.class);
             startActivity(intent);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void createPlayNotification() {
+        final NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.mipmap.play)
+                        .setContentTitle("Recorder App Notification")
+                        .setContentText("App is playing");
+
+
+        Intent resultIntent = new Intent(this, MainActivity.class);
+        // Because clicking the notification opens a new ("special") activity, there's
+        // no need to create an artificial back stack.
+        PendingIntent resultPendingIntent =
+                PendingIntent.getActivity(
+                        this,
+                        0,
+                        resultIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+        mBuilder.setContentIntent(resultPendingIntent);
+        // Sets an ID for the notification
+        int mNotificationId = 002;
+        // Gets an instance of the NotificationManager service
+        NotificationManager mNotifyMgr =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        // Builds the notification and issues it.
+        mNotifyMgr.notify(mNotificationId, mBuilder.build());
+    }
+
+    public void createSyncNotification() {
+        final NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.mipmap.play)
+                        .setContentTitle("Recorder App Notification")
+                        .setContentText("App is synchronizing");
+        // Sets an ID for the notification
+        final int mNotificationId = 003;
+        // Start a lengthy operation in a background thread
+        final NotificationManager mNotifyManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        int incr;
+                        // Do the "lengthy" operation 20 times
+                        for (incr = 0; incr <= 100; incr+=5) {
+                            // Sets the progress indicator to a max value, the
+                            // current completion percentage, and "determinate"
+                            // state
+                            mBuilder.setProgress(100, incr, false);
+                            // Displays the progress bar for the first time.
+                            mNotifyManager.notify(mNotificationId, mBuilder.build());
+                            // Sleeps the thread, simulating an operation
+                            // that takes time
+                            try {
+                                // Sleep for 5 seconds
+                                Thread.sleep(5*1000);
+                            } catch (InterruptedException e) {
+                                Log.d("Notification", "sleep failure");
+                            }
+                        }
+                        // When the loop is finished, updates the notification
+                        mBuilder.setContentText("Sync complete")
+                                // Removes the progress bar
+                                .setProgress(0,0,false);
+                        mNotifyManager.notify(mNotificationId, mBuilder.build());
+                    }
+                }
+// Starts the thread by calling the run() method in its Runnable
+        ).start();
     }
 }

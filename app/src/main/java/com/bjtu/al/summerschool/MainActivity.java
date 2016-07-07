@@ -161,7 +161,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
            startActivity(intent);
-        }
+        } else if (id == R.id.nav_translate) {
+           Intent intent = new Intent(MainActivity.this, TranslateActivity.class);
+           startActivity(intent);
+       } else if (id == R.id.nav_record) {
+       }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -247,6 +251,9 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View arg0) {
 
+                //Notification
+                createRecordNotification();
+
                 imageButton2.setBackgroundResource(R.drawable.ic_play_circle_filled_black_48dp);
                 saveButton.setBackgroundResource(R.drawable.ic_add_circle_black_48dp);
                 deleteButton.setBackgroundResource(R.drawable.ic_delete_black_48dp);
@@ -293,14 +300,14 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void createNotification(View view) {
+    public void createRecordNotification() {
         final NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.mipmap.play)
-                        .setContentTitle("My notification")
-                        .setContentText("Hello World!");
+                        .setContentTitle("Recorder App Notification")
+                        .setContentText("App is recording");
 
-        /*
+
         Intent resultIntent = new Intent(this, MainActivity.class);
         // Because clicking the notification opens a new ("special") activity, there's
         // no need to create an artificial back stack.
@@ -319,43 +326,6 @@ public class MainActivity extends AppCompatActivity
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         // Builds the notification and issues it.
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
-*/
-        // Sets an ID for the notification
-        final int mNotificationId = 001;
-        // Start a lengthy operation in a background thread
-        final NotificationManager mNotifyManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        new Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        int incr;
-                        // Do the "lengthy" operation 20 times
-                        for (incr = 0; incr <= 100; incr+=5) {
-                            // Sets the progress indicator to a max value, the
-                            // current completion percentage, and "determinate"
-                            // state
-                            mBuilder.setProgress(100, incr, false);
-                            // Displays the progress bar for the first time.
-                            mNotifyManager.notify(mNotificationId, mBuilder.build());
-                            // Sleeps the thread, simulating an operation
-                            // that takes time
-                            try {
-                                // Sleep for 5 seconds
-                                Thread.sleep(5*1000);
-                            } catch (InterruptedException e) {
-                                Log.d("Notification", "sleep failure");
-                            }
-                        }
-                        // When the loop is finished, updates the notification
-                        mBuilder.setContentText("Download complete")
-                                // Removes the progress bar
-                                .setProgress(0,0,false);
-                        mNotifyManager.notify(mNotificationId, mBuilder.build());
-                    }
-                }
-// Starts the thread by calling the run() method in its Runnable
-        ).start();
     }
 
 

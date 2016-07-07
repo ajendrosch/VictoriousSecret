@@ -66,8 +66,12 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
             Intent intent = new Intent(SettingsActivity.this, FileActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_manage) {
+
         } else if (id == R.id.nav_record) {
             Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_translate) {
+            Intent intent = new Intent(SettingsActivity.this, TranslateActivity.class);
             startActivity(intent);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

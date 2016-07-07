@@ -7,6 +7,13 @@
     android:choiceMode="singleChoice"
     android:weightSum="1">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Recorded Files"
+        android:id="@+id/FileText"
+        android:layout_gravity="right"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ListView
         android:layout_width="match_parent"
