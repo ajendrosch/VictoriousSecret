@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
         mFileName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/BeijingRecordings/" ;
         String date = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-        mFileName += date + format;
+        mFileName += date + "." + format;
 
         mRecorder.setOutputFile(mFileName);
         switch(format){
@@ -199,27 +199,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // save button
-        saveButton = (ImageButton) findViewById(R.id.saveButton);
-        //saveButton.setBackgroundResource(R.drawable.ic_pause_circle_filled_black_24dp);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-
-                Toast.makeText(MainActivity.this, "Save Pressed", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // delete button
-        deleteButton = (ImageButton) findViewById(R.id.deleteButton);
-        //deleteButton.setBackgroundResource(R.drawable.ic_pause_circle_filled_black_24dp);
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-
-                Toast.makeText(MainActivity.this, "Delete Pressed", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         // play button
         imageButton2 = (ImageButton) findViewById(R.id.playButton);
@@ -255,8 +234,6 @@ public class MainActivity extends AppCompatActivity
                 createRecordNotification();
 
                 imageButton2.setBackgroundResource(R.drawable.ic_play_circle_filled_black_48dp);
-                saveButton.setBackgroundResource(R.drawable.ic_add_circle_black_48dp);
-                deleteButton.setBackgroundResource(R.drawable.ic_delete_black_48dp);
 
                 String showString = "";
                 onRecord(mStartRecording);
