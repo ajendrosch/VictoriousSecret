@@ -52,6 +52,31 @@
                     android:theme="@style/AppTheme.Spinner"/>
 
             </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/mic_green">
+
+                <TextView
+                    android:textColor="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Sync Files with Drive"
+                    android:id="@+id/textSync"
+                    android:background="@color/mic_orange" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="New Button"
+                    android:id="@+id/buttonsync"
+                    android:background="@color/mic_green"/>
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </android.support.design.widget.AppBarLayout>

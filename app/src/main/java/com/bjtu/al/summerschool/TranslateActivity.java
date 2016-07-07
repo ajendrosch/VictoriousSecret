@@ -239,13 +239,13 @@ public class TranslateActivity extends AppCompatActivity implements OnClickListe
             Intent intent = new Intent(TranslateActivity.this, FileActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_manage) {
-
+            Intent intent = new Intent(TranslateActivity.this, SettingsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_record) {
             Intent intent = new Intent(TranslateActivity.this, MainActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_translate) {
-            Intent intent = new Intent(TranslateActivity.this, TranslateActivity.class);
-            startActivity(intent);
+
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

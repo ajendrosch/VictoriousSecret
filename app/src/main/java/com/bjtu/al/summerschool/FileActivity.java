@@ -46,6 +46,8 @@ public class FileActivity extends AppCompatActivity
             mPlayer.setDataSource(FileManager.path + "/" + mFileName);
             mPlayer.prepare();
             mPlayer.start();
+            createPlayNotification();
+
         } catch (IOException e) {
             Log.e(LOG_TAG, "prepare() failed");
         }
@@ -206,47 +208,4 @@ public class FileActivity extends AppCompatActivity
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
     }
 
-    public void createSyncNotification() {
-        final NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.mipmap.play)
-                        .setContentTitle("Recorder App Notification")
-                        .setContentText("App is synchronizing");
-        // Sets an ID for the notification
-        final int mNotificationId = 003;
-        // Start a lengthy operation in a background thread
-        final NotificationManager mNotifyManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        new Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        int incr;
-                        // Do the "lengthy" operation 20 times
-                        for (incr = 0; incr <= 100; incr+=5) {
-                            // Sets the progress indicator to a max value, the
-                            // current completion percentage, and "determinate"
-                            // state
-                            mBuilder.setProgress(100, incr, false);
-                            // Displays the progress bar for the first time.
-                            mNotifyManager.notify(mNotificationId, mBuilder.build());
-                            // Sleeps the thread, simulating an operation
-                            // that takes time
-                            try {
-                                // Sleep for 5 seconds
-                                Thread.sleep(5*1000);
-                            } catch (InterruptedException e) {
-                                Log.d("Notification", "sleep failure");
-                            }
-                        }
-                        // When the loop is finished, updates the notification
-                        mBuilder.setContentText("Sync complete")
-                                // Removes the progress bar
-                                .setProgress(0,0,false);
-                        mNotifyManager.notify(mNotificationId, mBuilder.build());
-                    }
-                }
-// Starts the thread by calling the run() method in its Runnable
-        ).start();
-    }
 }
